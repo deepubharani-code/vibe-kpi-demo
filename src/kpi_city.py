@@ -2,8 +2,12 @@ import sqlite3
 import pprint
 
 DB_PATH = "data/db/analytics.db"
+ALLOWED_CITIES = {"Mumbai", "Delhi", "Bangalore", "Chennai"}
 
 def city_kpi(city: str, conn: sqlite3.Connection = None):
+    if city not in ALLOWED_CITIES:
+        return None
+
     sql = """
     SELECT
       city,
